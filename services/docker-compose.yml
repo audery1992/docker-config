@@ -38,6 +38,8 @@ services:
       - "8082:8082"
       - "8083:8083"
       - "8084:8084"
+      - "8085:8085"
+      - "8086:8086"
     restart: always
     command: nginx -g 'daemon off;'
     container_name: nginx
@@ -90,6 +92,21 @@ services:
         - /mnt/hgfs/project/blog-master/_config.yml:/opt/hexo/judith/_config.yml
         - /root/.ssh:/root/.ssh
       container_name: nodejs
+
+  mongo:
+    build: ./mongo
+    ports:
+      - "27017:27017"
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD=123456
+    volumes:
+      - ./mongo/mongod.conf:/etc/mongo/mongod.conf:rw
+      - ../data/mongo:/var/lib/mongodb:rw
+      - ../logs/mongo:/var/log/mongodb:rw
+    restart: always
+    container_name: mongo
+
 
 
 

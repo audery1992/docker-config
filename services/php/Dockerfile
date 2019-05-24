@@ -36,6 +36,7 @@ RUN pecl install /home/mcrypt-1.0.1.tgz && echo "extension=mcrypt.so" > /usr/loc
 
 # pecl 安装 Redis
 RUN pecl install /home/redis.tgz && echo "extension=redis.so" > /usr/local/etc/php/conf.d/redis.ini
+RUN pecl install mongodb && echo "extension=mongodb.so" > /usr/local/etc/php/conf.d/mongodb.ini
 
 # 安装libmemcached
 RUN tar zxvf /home/libmemcached.tar.gz \
